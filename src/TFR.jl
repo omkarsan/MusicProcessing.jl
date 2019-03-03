@@ -49,14 +49,15 @@ end
 """"""
 function stft{T}(audio::SampleBuf{T, 2, Hertz},
                  windowsize::Int = 1024,
-                 hopsize::Int = windowsize >> 2; kwargs...)
+                 hopsize::Int = windowsize >> 2; 
+                 window = hanning, kwargs...)
     nchannels = SampledSignals.nchannels(audio)
     noverlap = windowsize - hopsize
 
     stft = Array(Matrix, nchannels)
     data = tofloat(audio.data)
     for i in 1:nchannels
-        stft[i] = DSP.stft(data[:, i], windowsize, noverlap; kwargs...)
+        stft[i] = DSP.stft(data[:, i], windowsize, noverlap; window = window, kwargs...)
     end
     cat(3, stft...)
 end
@@ -64,10 +65,11 @@ end
 """"""
 function stft{T, N}(audio::SampleBuf{T, N, Hertz},
                     windowsize::Seconds,
-                    hopsize::Seconds = windowsize / 4; kwargs...)
+                    hopsize::Seconds = windowsize / 4; 
+                    window = hanning, kwargs...)
     w = round(Int, windowsize * audio.samplerate)
     h = round(Int, hopsize * audio.samplerate)
-    stft(audio, w, h; kwargs...)
+    stft(audio, w, h; window =window, kwargs...)
 end
 
 
