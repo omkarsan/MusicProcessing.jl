@@ -9,7 +9,7 @@ function spectrogram{T}(audio::SampleBuf{T, 1, Hertz},
                         hopsize::Int = windowsize >> 2;
                         window = hanning, kwargs...)
     noverlap = windowsize - hopsize
-    data = map(Float64, audio.data)
+    data = map(Float32, audio.data)
     DSP.spectrogram(data, windowsize, noverlap; fs = audio.samplerate.val, window = window, kwargs...)
 end
 
@@ -19,7 +19,7 @@ function spectrogram{T}(audio::SampleBuf{T, 2, Hertz},
                         hopsize::Int = windowsize >> 2;
                         window = hanning, kwargs...)
     noverlap = windowsize - hopsize
-    data = map(Float64, audio.data)
+    data = map(Float32, audio.data)
     (mapslices(data, 1) do data
         DSP.spectrogram(data, windowsize, noverlap; fs = audio.samplerate.val, window = window, kwargs...)
     end)[:]
