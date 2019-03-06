@@ -107,6 +107,9 @@ function slowdown(audio::SampleBuf, ratio::Real, windowsize::Int = 1024, hopsize
 end
 
 """"""
+function autocorr(audio::SampleBuf )
+    
+""""""
 function zero_crossing_rate{T}(audio::SampleBuf{T, 1}, framesize::Int = 1024, hopsize::Int = framesize >> 2)
     nframes = MusicProcessing.nframes(length(audio.data), framesize, hopsize)
     result = Array(Float32, nframes)
