@@ -7,12 +7,12 @@ using SIUnits.ShortUnits
 using SampledSignals
 
 # types used for fixed-point 16-bit and 32-bit encoding
-typealias PCM16Sample Fixed{Int16, 15}
-typealias PCM32Sample Fixed{Int32, 31}
+const PCM16Sample= Fixed{Int16, 15}
+const PCM32Sample=Fixed{Int32, 31}
 
 # shortcut to SIQuantity type of frequency and time
-typealias Hertz SIUnits.SIQuantity{Int64,0,0,-1,0,0,0,0,0,0}
-typealias Seconds{R} SIUnits.SIQuantity{R,0,0,1,0,0,0,0,0,0}
+const Hertz= SIUnits.SIQuantity{Int64,0,0,-1,0,0,0,0,0,0}
+const Seconds{R}= SIUnits.SIQuantity{R,0,0,1,0,0,0,0,0,0}
 
 export Hz, kHz, s, ..
 export PCM16Sample, PCM32Sample
